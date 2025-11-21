@@ -67,6 +67,7 @@ public class API_Stepdefinitions {
                 .body(key, Matchers.equalTo(value));
     }
 
+    // products.feature ve product.feature son senaryo ---invalid token
     @Given("The api user sends a {string} request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.")
     public void the_api_user_sends_a_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_the_reason_phrase_unauthorized(String httpMethod) {
         try {
@@ -176,7 +177,9 @@ public class API_Stepdefinitions {
     // ********************************************* /api/product/{id} ********************************************
     @Given("The api user verifies the content of the data in the response body, including {int}, {int}, {string}, {string}, {int}, {int}, {int}, {int}, {int}, {int}, {int}, {string}, {string}, {string}, {string} and {string}.")
     public void the_api_user_verifies_the_content_of_the_data_in_the_response_body_including_and(int data_id, int creator_id, String type, String slug, int category_id, int price, int point, int unlimited_inventory, int ordering, int translations_id, int product_id, String locale, String title, String seo_description, String summary, String description) {
-        jsonPath = API_Methods.response.jsonPath();
+
+        //jsonPath = API_Methods.response.jsonPath();
+        jsonPath = response.jsonPath();
 
         assertEquals(data_id, jsonPath.getInt("data.id"));
         assertEquals(creator_id, jsonPath.getInt("data.creator_id"));
