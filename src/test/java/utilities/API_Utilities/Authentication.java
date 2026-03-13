@@ -10,34 +10,78 @@ import org.json.JSONObject;
 
 import static io.restassured.RestAssured.given;
 
-public class Authentication{
+public class Authentication {
 
     static ConfigLoader configLoader = new ConfigLoader();
+
     public static String generateToken() {
 
-        RequestSpecification spec = new RequestSpecBuilder().setBaseUri(configLoader.getApiConfig("base_url")).build();
+        // Base URL oluşturuluyor
+        RequestSpecification spec = new RequestSpecBuilder()
+                .setBaseUri(configLoader.getApiConfig("base_url"))
+                .build();
 
-        spec.pathParams("pp1", "api", "pp2", "token");
-
-        JSONObject reqBody  = new JSONObject();
+        // Request body oluşturuluyor
+        JSONObject reqBody = new JSONObject();
         reqBody.put("email", configLoader.getApiConfig("adminEmail"));
         reqBody.put("password", configLoader.getApiConfig("adminPassword"));
 
+        // POST isteği gönderiliyor
         Response response = given()
+                //.log().all() // 1. Log ekledik
                 .spec(spec)
+                .header("User-Agent", "PostmanRuntime/7.32.2") // Postman gibi davranmasını sağlar
                 .contentType(ContentType.JSON)
                 .header("Accept", "application/json")
-                .header("x-api-key", "1234")
-                .when()
+                .header("x-api-key", configLoader.getApiConfig("x_api_key"))
                 .body(reqBody.toString())
-                .post("/{pp1}/{pp2}");
+                .post("/api/token");
+
+        // DEBUG: Response yazdır
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.asString());
+
+        // Status code kontrolü
+        if (response.getStatusCode() != 200) {
+            throw new RuntimeException("Token alınamadı! Status Code: "
+                    + response.getStatusCode() + ", Response: " + response.asString());
+        }
+/*
+        // JSON parse, null güvenli
+        JsonPath repJP;
+        try {
+            repJP = response.jsonPath();
+        } catch (Exception e) {
+            throw new RuntimeException("Response JSON olarak parse edilemedi! Response: " + response.asString());
+        }
+
+        // Token alma: API'nin JSON yapısına göre değişebilir
+        String token = null;
+
+        if (repJP.getString("data.access_token") != null) {
+            token = repJP.getString("data.access_token");
+        } else if (repJP.getString("access_token") != null) {
+            token = repJP.getString("access_token");
+        }
+
+        if (token == null || token.isEmpty()) {
+            throw new RuntimeException("Token JSON'da bulunamadı! Response: " + response.asString());
+        }
+
+        System.out.println("Token : " + token);
+        return token;
+    }
 
 
+
+*/
         JsonPath repJP = response.jsonPath();
 
         String token = repJP.getString("data.access_token");
         System.out.println("Token : " + token);
 
         return token;
+
+
     }
 }

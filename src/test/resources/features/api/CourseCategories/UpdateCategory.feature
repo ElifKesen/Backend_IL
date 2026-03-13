@@ -24,7 +24,7 @@ Feature: As an administrator, I want to update the information of the course cat
       | title            |
       | Education |
 
-
+  @UPDATE
   Scenario: When a PATCH body containing an unregistered (id) with valid authorization information and the correct
   data (title) is sent to the /api/updateCategory/{id} endpoint, it should be verified that the returned status code is 203,
   the remark information in the response body is "failed" and the message information is "There is not category for this id."

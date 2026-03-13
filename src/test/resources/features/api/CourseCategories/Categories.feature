@@ -1,5 +1,5 @@
 Feature: As an administrator, I want to access course categories via an API connection.
-  @API
+
   Scenario Outline: When a GET request is sent to the /api/categories endpoint with valid authorization,
   the response status code should be 200, the remark should be “success”, and the information of id(x)
   (slug, parent_id, icon, order, title, category_id, locale) should be validated.
@@ -19,8 +19,8 @@ Feature: As an administrator, I want to access course categories via an API conn
 
     Examples:
       | dataIndex | slug                    | icon                                                     | order| id | category_id | locale | title        |
-      | 1         | En-guzel-ders-29 | /store/1/default_images/categories_icons/code.png|               224   | 604| 1161        | en     | En guzel ders|
-
+      | 1         | Online-Education-61 | /store/1/default_images/categories_icons/code.png|               252   | 643| 1200        | en     | Online Education|
+  @API
   Scenario: When a GET request is sent to the /api/categories endpoint with invalid (invalid token) authorization credentials,
   it should return a 401 status code. Additionally, it should be verified that the message field in the response body is
   "Unauthenticated."

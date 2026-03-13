@@ -20,6 +20,7 @@ public class HooksAPI {
         spec = new RequestSpecBuilder()
                 .setBaseUri(configLoader.getApiConfig("base_url"))
                 .addHeader("Accept", "application/json")
+                .addHeader("User-Agent", "PostmanRuntime/7.32.2")
                 .addHeader("x-api-key", "1234")
                 .addHeader("Authorization", "Bearer " + token)
                 .build();
