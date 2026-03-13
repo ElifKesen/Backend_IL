@@ -1,12 +1,12 @@
 Feature: As an administrator, I want to update the information of the course category with the specified ID via an API connection.
-
+  @UPDATE
   Scenario Outline: Verify that a PATCH request to /api/updateCategory/{id} with valid authorization and correct data
   (title) returns status 200, remark “success”, message “Successfully Updated.”, and the Updated Category Id in the
   response matches the {id} path parameter.
 
     * The api user constructs the base url with the "admin" token.
     # Api kullanicisi "admin" token ile base urli olusturur
-    * The api user sets "api/updateCategory/964" path parameters.
+    * The api user sets "api/updateCategory/961" path parameters.
     # Api kullanicisi "api/updateCategory/id" path parametrelerini olusturur
     * The api user prepares a PATCH request containing the "<title>" information to send to the api updateCategory endpoint.
     # Api kullanicisi api updateCategory endpointine gondermek icin bir patch request body hazirlar
@@ -24,7 +24,7 @@ Feature: As an administrator, I want to update the information of the course cat
       | title            |
       | Education |
 
-  @UPDATE
+
   Scenario: When a PATCH body containing an unregistered (id) with valid authorization information and the correct
   data (title) is sent to the /api/updateCategory/{id} endpoint, it should be verified that the returned status code is 203,
   the remark information in the response body is "failed" and the message information is "There is not category for this id."

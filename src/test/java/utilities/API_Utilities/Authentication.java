@@ -28,9 +28,9 @@ public class Authentication {
 
         // POST isteği gönderiliyor
         Response response = given()
-                //.log().all() // 1. Log ekledik
+                .log().all()
                 .spec(spec)
-                .header("User-Agent", "PostmanRuntime/7.32.2") // Postman gibi davranmasını sağlar
+                .header("User-Agent", "PostmanRuntime/7.52.0") // Postman gibi davranmasını sağlar
                 .contentType(ContentType.JSON)
                 .header("Accept", "application/json")
                 .header("x-api-key", configLoader.getApiConfig("x_api_key"))
