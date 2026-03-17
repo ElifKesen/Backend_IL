@@ -39,42 +39,14 @@ public class Authentication {
 
         // DEBUG: Response yazdır
         System.out.println("Status Code: " + response.getStatusCode());
-        System.out.println("Response Body: " + response.asString());
+       // System.out.println("Response Body: " + response.asString());
 
         // Status code kontrolü
         if (response.getStatusCode() != 200) {
             throw new RuntimeException("Token alınamadı! Status Code: "
                     + response.getStatusCode() + ", Response: " + response.asString());
         }
-/*
-        // JSON parse, null güvenli
-        JsonPath repJP;
-        try {
-            repJP = response.jsonPath();
-        } catch (Exception e) {
-            throw new RuntimeException("Response JSON olarak parse edilemedi! Response: " + response.asString());
-        }
 
-        // Token alma: API'nin JSON yapısına göre değişebilir
-        String token = null;
-
-        if (repJP.getString("data.access_token") != null) {
-            token = repJP.getString("data.access_token");
-        } else if (repJP.getString("access_token") != null) {
-            token = repJP.getString("access_token");
-        }
-
-        if (token == null || token.isEmpty()) {
-            throw new RuntimeException("Token JSON'da bulunamadı! Response: " + response.asString());
-        }
-
-        System.out.println("Token : " + token);
-        return token;
-    }
-
-
-
-*/
         JsonPath repJP = response.jsonPath();
 
         String token = repJP.getString("data.access_token");
