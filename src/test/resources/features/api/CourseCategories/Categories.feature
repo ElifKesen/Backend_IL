@@ -19,7 +19,7 @@ Feature: As an administrator, I want to access course categories via an API conn
 
     Examples:
       | dataIndex | slug                    | icon                                                     | order| id | category_id | locale | title        |
-      | 1         | Online-Education-70 | /store/1/default_images/categories_icons/code.png|               259   | 654| 1211        | en     | Online Education|
+      | 1         | Online-Education-155 | /store/1/default_images/categories_icons/code.png|               359   | 654| 1211        | en     | Online Education|
 
   Scenario: When a GET request is sent to the /api/categories endpoint with invalid (invalid token) authorization credentials,
   it should return a 401 status code. Additionally, it should be verified that the message field in the response body is
