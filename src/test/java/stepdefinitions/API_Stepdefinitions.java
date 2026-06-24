@@ -19,11 +19,13 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.*;
+import static utilities.API_Utilities.API_Methods.fullPath;
 
 public class API_Stepdefinitions {
 
     Response response;
     JsonPath jsonPath;
+
 
     JSONObject jsonObjectBody=new JSONObject();
     HashMap<String, Object> hashmapBody=new HashMap<>();
@@ -41,6 +43,7 @@ public class API_Stepdefinitions {
     public void the_api_user_sets_path_parameters(String pathParam) {
 
         API_Methods.pathParam(pathParam);
+
     }
 
     @Given("The api user sends a GET request and saves the returned response.")
@@ -48,7 +51,9 @@ public class API_Stepdefinitions {
         response = given()
                 .spec(HooksAPI.spec)
                 .when()
-                .get(API_Methods.fullPath);
+               .get(API_Methods.fullPath);
+
+
 
         response.prettyPrint();
     }
@@ -74,7 +79,7 @@ public class API_Stepdefinitions {
             response = given()
                     .spec(HooksAPI.spec)
                     .when()
-                    .get(API_Methods.fullPath);
+                    .get(fullPath);
         } catch (Exception e) {
            exceptionMesaj=e.getMessage();
         }
@@ -135,14 +140,14 @@ public class API_Stepdefinitions {
                     .contentType(ContentType.JSON)
                     .when()
                     .body(jsonObjectBody.toString())
-                    .post(API_Methods.fullPath);
+                    .post(fullPath);
         }else {
             response = given()
                     .spec(HooksAPI.spec)
                     .contentType(ContentType.JSON)
                     .body(hashmapBody)
                     .when()
-                    .patch(API_Methods.fullPath);
+                    .patch(fullPath);
         }
 
       response.prettyPrint();
@@ -233,7 +238,7 @@ public class API_Stepdefinitions {
         response = given()
                 .spec(HooksAPI.spec)
                 .when()
-                .delete(API_Methods.fullPath);
+                .delete(fullPath);
 
         response.prettyPrint();
     }

@@ -1,5 +1,5 @@
 Feature: As an administrator, I want to access course categories via an API connection.
-  @API
+
   Scenario Outline: When a GET request is sent to the /api/categories endpoint with valid authorization,
   the response status code should be 200, the remark should be “success”, and the information of id(x)
   (slug, parent_id, icon, order, title, category_id, locale) should be validated.
@@ -14,13 +14,13 @@ Feature: As an administrator, I want to access course categories via an API conn
     # Api kullanicisi status codeun 200 oldugunu dogrular
     * The api user verifies that the "remark" information in the response body is "success".
     # Api kullanicisi response bodydeki remark bilgisinin "success" oldugunu dogrular
-   * The api user verifies the "<slug>", "<icon>", <order>, <id>, <category_id>, "<locale>" and "<title>" information of the item at <dataIndex> in the response body.
+    * The api user verifies the "<slug>", "<icon>", <order>, <id>, <category_id>, "<locale>" and "<title>" information of the item at <dataIndex> in the response body.
     # Api kullanıcısı response body icindeki <dataIndex> indexe sahip olanin "<slug>", "<icon>", <order>, <id>, <category_id>, "<locale>" ve "<title>" bilgilerini doğrular.
 
     Examples:
       | dataIndex | slug                    | icon                                                     | order| id | category_id | locale | title        |
-      | 1         | Online-Education-155 | /store/1/default_images/categories_icons/code.png|               359   | 654| 1211        | en     | Online Education|
-
+      | 1         | Online-Education-31 | /store/1/default_images/categories_icons/code.png|               42   | 829| 1386        | en     | Online Education|
+  @API
   Scenario: When a GET request is sent to the /api/categories endpoint with invalid (invalid token) authorization credentials,
   it should return a 401 status code. Additionally, it should be verified that the message field in the response body is
   "Unauthenticated."

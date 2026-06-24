@@ -1,5 +1,6 @@
+@PROD
 Feature: As an administrator, I want to access detailed information about the product with the specified ID via an API connection.
-  @PROD
+
   Scenario Outline: It should be verified that when a valid authorization and correct (id) are included in a GET request to the
   /api/product/{id} endpoint, the response status code is 200, and the remark in the response body is "success". The accuracy of
   the data in the response body (id, creator_id, type, slug, category_id, price, point, unlimited_inventory, ordering, id, product_id,
@@ -48,7 +49,7 @@ Feature: As an administrator, I want to access detailed information about the pr
     * The api user verifies that the "remark" information in the response body is "failed".
     * The api user verifies that the "data.message" information in the response body is "No id".
 
-  @PROD
+
   Scenario Outline: When an invalid (invalid token) authorization information and correct data (id) are sent with a GET request to the
   /api/product/{id} endpoint, the returned status code should be verified as 401. The message in the response body should be
   "Unauthenticated."

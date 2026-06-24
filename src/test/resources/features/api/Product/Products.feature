@@ -1,5 +1,6 @@
-Feature: As an administrator, I want to access products via an API connection.
 
+Feature: As an administrator, I want to access products via an API connection.
+  @PRODS
   Scenario Outline: A GET request with valid authorization information to the /api/products endpoint should return a status code of 200,
   and the remark field in the response body should be verified as "success". Additionally, for the verification of specific product
   information (id), the response body of the GET request should contain the following details: (creator_id, type, slug, category_id,
